@@ -11,6 +11,7 @@ GTUGGirls python ハンズオン資料
 
 ## 教材
 - [Pythonプログラミング入門 - 教材・講義動画](https://sites.google.com/view/ut-python/resource/%E6%95%99%E6%9D%90%E8%AC%9B%E7%BE%A9%E5%8B%95%E7%94%BB?authuser=0) Jupyter版
+
 ### 教材について
 - 東京大学 数理・情報教育研究センター さんへの問い合わせと返答を記載する
 
@@ -27,16 +28,24 @@ GTUGGirls python ハンズオン資料
 1. Live Share の使い方
 1. 仮想環境構築
 1. jupyter と file
+    - セル
+    - コマンドライン実行
 1. 簡単な導入
     - エラーは読んで
-1. 概念
+1. 概念(名前)
     - オブジェクト
     - メソッド
     - インスタンス
 1. 関数定義
     - return と print 
+    - スコープ
 1. モジュール
 1. クラス
+1. 文字列、リスト、条件分岐、辞書、タプル
 1. 内包表記とアンパック代入
 1. 高階関数（lambda, map, filter）
+1. (時間があったら)データ分析する時に知ってたらいい色々
+    - pandas
+    - numpy
+    - matplotlib
 
