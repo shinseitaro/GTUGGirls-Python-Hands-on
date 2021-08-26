@@ -23,11 +23,19 @@ GTUGGirls python ハンズオン資料
     - Python : ms-python.python
     - Live Share: ms-vsliveshare.vsliveshare
 
+## 進め方
+
+1. 参加者の方は何かしらのプログラミングを触ったことがある人を想定
+1. よって、教材（＝文法）は個々人で読んで実行してもらう。わからないことなどは別途質問してもらう（Twitterなどで）
+1. この会は、Pythonを読み書きしていく上で守ってほしいお作法と、Pythonの概念と、Pythonistaが好む記法などを中心にお伝えする
+1. データ型や文法は自分でやってもらう
+
+
 ## タイムテーブル
 
-1. Live Share の使い方
 1. 仮想環境構築
 1. jupyter と file
+    - Python ≠ Jupyter Notebook 
     - セル
     - コマンドライン実行
 1. 簡単な導入
