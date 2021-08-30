@@ -90,6 +90,76 @@ $ pip install -r requirements.txt
 
 ---
 
+### Python は jupyter notebook ではない
+
+- jupyter を python と思ってるひとが多数
+- jupyter でしか python を実行出来ないひと多数
+- ヤメて
+---
+
+## エラーは読んで
+
+```python
+>>> 10/0
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ZeroDivisionError: division by zero
+```
+
+- エラーメッセージは下から上に読んでいく
+
+---
+## python の概念,キーワード,知らないとツライ単語
+
+- オブジェクト
+- メソッド 
+- 関数
+- クラス
+- インスタンス
+- スコープ
+- モジュール
+---
+
+## DRY 
+
+- 概念がわかってないとかけないPythonの哲学
+
+---
+## 部品を作ってループで回す
+
+
+---
+---
+### Pythonista がこのむ python らしい書き方
+
+- 内包表記
+- アンパック代入
+- 高階関数（lambda, map, filter）
+- f-リテラル
+---
+
+## test
+
+
+---
+
+## python 概念と pythonist らしいコードの例
+
+### 構造
+
+- 私が「キレイ」だと思ったpythonのfile構造
+- モジュールの説明も兼ねる
+- main.py を実行ファイルとして、あとのファイルには関数群を作る
+
+
+### python はオブジェクト
+
+- beautifulsoup でスクレイピングしたデータを
+- pandas に流し込んで 
+- 可視化
+
+---
+
 ### VSCode の設定
 
 ```json
@@ -148,38 +218,3 @@ $ pip install -r requirements.txt
 }
 ```
 ---
-### Python は jupyter notebook ではない
-
-- jupyter を python と思ってるひとが多数
-- jupyter でしか python を実行出来ないひと多数
-- ヤメて
----
-
-## エラーは読んで
-
----
-## python の概念,キーワード,知らないとツライ単語
-
-- オブジェクト
-- インスタンス
-- メソッド / 関数
-- 関数定義
-- クラス
-- スコープ
-- モジュール
----
-### Pythonista がこのむ python らしい書き方
-
-- 内包表記
-- アンパック代入
-- 高階関数（lambda, map, filter）
----
-
-## python 概念と pythonist らしいコード
-
-### python はオブジェクト
-
-- beautifulsoup でスクレイピングしたデータを
-- pandas に流し込んで 
-- 可視化
-
