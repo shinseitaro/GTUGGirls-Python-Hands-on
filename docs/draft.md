@@ -24,11 +24,25 @@ GTUGGirls ハンズオン
     - [月刊Fintalk](https://fintalk.connpass.com/) (主宰)
     - [モグモグDjango](https://mogumogu-django.connpass.com/) (主宰)
 ---
-### お願い
-- わたしのメインマシンが Linux なので、Windowsの知識が弱いです
-- なので、Windowsユーザの方にヘルプをお願いすることがあると思います。ご協力下さいませ。
-- Mac は linux とほとんど同じだろうと思い込んでるフシがありますが、もし違ったらすぐに教えて下さい。
+## 今日の予定
+1. 仮想環境作成
+1. Python完全に理解した、からちょっと脱却して、チョットデキルひとになる最初の一歩
 ---
+今日伝えたいことはたったひとつ
+
+# とりあえずPythonの仮想環境作ってください。<br>心からのお願いです。
+---
+### Windows Anaconda
+![bg right:60%](https://i.imgur.com/gne0Np7.png)
+- Anaconda Prompt を使う
+- Anaconda PowerShell Prompt ではない
+
+---
+### Windows Store
+- Windows Store で python をインストールした場合
+
+---
+
 ### Python :snake: を確認
 
 - terminal / command prompt 立ち上げ
@@ -42,7 +56,6 @@ GTUGGirls ハンズオン
     which python
     ```
     - 有効な python パスのみ出てくる
-- Pythonはバージョンやディストリビューターで複数インストールすることが可
 
 ---
 
@@ -54,53 +67,60 @@ GTUGGirls ハンズオン
 #### 仮想環境とは
 - ただのホルダ
 - 仮想環境を作成とは
-    - インストールしたPythonだけをプロジェクトディレクトリにコピーすること
+    - インストールしたPythonだけを作業ディレクトリ（プロジェクトディレクトリ）にコピーすること
 - 仮想環境に入るとは
-    - つくったコピー環境を使う
+    - つくったコピー環境を使うこと
 - なぜ仮想環境を作る？
     - 作成、削除、改変、なんでも出来る
     - 何かしらの理由で実行できなくなったとしても仮想環境ディレクトリを消して再作成すればいい
     - サードパーティライブラリのコンフリクトを防ぐ
-    - 「自分のPythonでは動きません」という情弱行動を防げる
+    - 「自分のPythonではinstall出来ません」という情弱行動を防げる :point_left: :satisfied:
 ---
 
 #### 仮想環境構築手順
-- 例： `myproject` というプロジェクトディレクトリ配下で仮想環境を作る
+- 例： `myproject` という作業ディレクトリ配下で仮想環境を作る
     - お作法
         - デスクトップに作らない
         - root ディレクトリ直下には作らない
         - 半角英数字のみで作成(日本語は使わんで)
----
+- 作業ディレクトリ＝レポジトリの感覚
+- レポジトリがわからないひとにはただのホルダでオッケ
 
-1. プロジェクトディレクトリ作成
+---
+#### 仮想環境構築手順 Mac / Linux
+
+1. 作業ディレクトリ作成
     ```bash
     mkdir myproject
     cd myproject
     ```
 1. 仮想環境構築
-    ```python
-    python -m venv .venv`
+    ```bash
+    python -m venv .venv
     ``` 
+1. 仮想環境に入る 
+    ```bash
+    source .venv/bin/activate
+    ```
+1. 仮想環境に入ったことを確認
+    ```bash
+    which python
+    ```
     
-1. `.venv` ディレクトリ作成確認
-1. 仮想環境に入る    
-    - (linux / mac) `source .venv/bin/activate` 
-    - (win) `venv\Script\activate` 
+---
+#### 仮想環境構築手順 Windows
 
-- プロジェクトディレクトリ＝レポジトリの感覚
-- レポジトリがわからないひとにはただのホルダでオッケ
-
-
+あとで書く
 ---
 
-#### 以後、必ずするクセ付けて
+#### 以後、Python を実行するターミナルでは必ず仮想環境にはいる
 - (linux / mac) 
-    ```
-    $ source .venv/bin/activate
-    $ which python
+    ```bash
+    source .venv/bin/activate
+    which python
     ```
 - (win) 
-    ```
+    ```bash
     venv\Script\activate
     where python 
     ``` 
@@ -109,36 +129,64 @@ GTUGGirls ハンズオン
 ### ライブラリインストール
 
 #### pip とは
+- Pythonで書かれたソフトウェアをインストール、管理するためのパッケージ管理システム
+#### 文法
+```bash
+pip install ライブラリ名
+``` 
+###### 【コラム】 むやみに、pip install して不幸になるひとの行動パターン
+> 1. 仮想環境作らずに、いきなり `pip install ライブラリ名` するひと
+> 1. jupyter notebook 上で `!pip install ライブラリ名` するひと
+> - pip は ライブラリ同士の依存関係を管理しない。よってコンフリクトを起こして「自分のPythonではinstall出来ません」という情弱行動になる（二回目） :point_left: :satisfied:
 
 ---
 
 ### ライブラリインストール
 
-- `pip install ライブラリ名` するのは最初の一回だけ、`pip install -U pip `
+1. まずは `which python` / `where python` して仮想環境に入っているか確認
+1. `pip install ライブラリ名` するのは、pip じたいをUpdateするときだけ
+    ```bash
+    pip install -U pip 
+    ```
+1. 上記以外のインストールは、作業ディレクトリ直下に `requirements.txt` にインストールしたいライブラリ名を書いてインストールする
+    1. `requirements.txt` 新規作成(慣習的にこの名前だが違ってもOK)
+        ```bash
+        touch requirements.txt 
+        ``` 
+    1. `requirements.txt` にインストールしたいライブラリ名を書く
+        ```bash
+        # 一行に一つ
+        beautifulsoup4
+        # バージョン指定も可
+        requests-html == 0.10.0
+        ```
+    1. `-r` オプションでインストール
+        ```bash
+        pip install -r requirements.txt
+        ```
+---
+### ライブラリインストール 確認
+
 ```bash
-touch requirements.txt 
-``` 
-```bash
-# linux / mac
-$ which python 
-# windows
-$ where python 
+pip freeze 
 ```
-```bash
-$ pip install -r requirements.txt
-```
+
+### .venv を覗く :eyes: 
+
+### .venv を削除してもう一回インストール
 
 ---
 ## 演習
 1. ディレクトリ `gtugtest` 作成
 1. その中に python の仮想環境を作成
 1. 以下のライブラリを仮想環境下にインストール
+    > djangorestframework
+    > Django
 1. `gtugtest` 削除
----
-### Anaconda / miniconda について
 
 ---
-
+# 「Python完全に理解した」からちょっと脱却して<br>「チョットデキル」ひとになる最初の一歩
+---
 ### Python は jupyter notebook ではない
 
 - jupyter を python と思ってるひとが多数
@@ -146,7 +194,7 @@ $ pip install -r requirements.txt
 - ヤメて
 ---
 
-## エラーは読んで
+### エラーは読んで
 
 ```python
 >>> 10/0
@@ -154,8 +202,19 @@ Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 ZeroDivisionError: division by zero
 ```
-
 - エラーメッセージは下から上に読んでいく
+- 上記の場合 `ZeroDivisionError: division by zero` がエラーの根幹
+- 質問する時は、エラーメッセージを全部コピペして、問題ない範囲でコードを渡して再現してもらおう
+
+---
+### コピペはしないで
+
+- [記者に「プログラミングのスキル」って必要なの？ちなみにNHKニュースの画像生成も記者がコードを書いてます｜NHK取材ノート｜note](https://note.com/nhk_syuzai/n/n9ccbd599da50)
+    > こうした手を動かした学習は確実に取材に役立ち、大きなシステムトラブルが発生した時に、**原因が推測**できたりするようになりました。
+    - ほんとコレ
+    - ほんとコレ
+    - ほんとコレ    
+
 
 ---
 ## python の概念,キーワード,知らないとツライ単語
