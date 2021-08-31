@@ -2,10 +2,14 @@
 
 @import 'default';
 
+
+
 section {
     font-family: "Arial", "Hiragino Maru Gothic ProN";
     font-size: 32px;
     padding: 40px;
+    /* 上詰め、上寄せする center だと中央寄せ */
+    justify-content: start;
 }
 
 section.title h1 {

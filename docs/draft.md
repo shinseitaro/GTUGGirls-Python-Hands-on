@@ -4,44 +4,93 @@ theme: test
 footer: "by **＠しんせいたろう**"
 paginate: true
 ---
-# 雰囲気でPythonを使っている人のためのPython再入門
+# 雰囲気でPythonを使っている人のための<br>Python再入門
+
+2021/09/04
+GTUGGirls ハンズオン
+
 ---
+自己紹介
 
 - [しんせいたろう](https://twitter.com/shinseitaro)
-- 米国株とれーだー
 - 雰囲気でpython書いてる(10年以上)
-- 時系列データ分析（株、暗号資産、為替）、投資ストラテジー作成
-- python の個別指導
-- GTUGGirls
-- Finpy
-- 月刊Fintalk
-- モグモグDjango
+- しごと
+    - 米国株とれーだー
+    - 時系列データ分析（株、暗号資産、為替）、投資ストラテジー作成
+    - python の個別指導
+- コミュニティ    
+    - [GTUGGirls](https://gtuggirls.connpass.com/) (スタッフ)
+    - [Fin-py](https://fin-py.connpass.com/) (准管理者)
+    - [月刊Fintalk](https://fintalk.connpass.com/) (主宰)
+    - [モグモグDjango](https://mogumogu-django.connpass.com/) (主宰)
 ---
-
+### お願い
+- わたしのメインマシンが Linux なので、Windowsの知識が弱いです
+- なので、Windowsユーザの方にヘルプをお願いすることがあると思います。ご協力下さいませ。
+- Mac は linux とほとんど同じだろうと思い込んでるフシがありますが、もし違ったらすぐに教えて下さい。
+---
 ### Python :snake: を確認
-- install を確認
-- which python
-- where python
+
+- terminal / command prompt 立ち上げ
+- windows:
+    ```bash
+    where python
+    ```
+    - 一番上にでてきた python へのパスが有効
+- mac / linux 
+    ```bash
+    which python
+    ```
+    - 有効な python パスのみ出てくる
+- Pythonはバージョンやディストリビューターで複数インストールすることが可
 
 ---
-## 仮想環境構築
 
+### 仮想環境構築
+
+![bg 65%](https://i.imgur.com/6dJfgSZ.jpg)
+
+---
 #### 仮想環境とは
 - ただのホルダ
-- 仮想環境に入る＝そこでつくったコピー環境を使う
-- プロジェクトディレクトリ＝レポジトリの感覚
-- レポジトリがわからないひとにはただのホルダでオッケ
-- 作成、削除、改変、なんでも出来る
+- 仮想環境を作成とは
+    - インストールしたPythonだけをプロジェクトディレクトリにコピーすること
+- 仮想環境に入るとは
+    - つくったコピー環境を使う
+- なぜ仮想環境を作る？
+    - 作成、削除、改変、なんでも出来る
+    - 何かしらの理由で実行できなくなったとしても仮想環境ディレクトリを消して再作成すればいい
+    - サードパーティライブラリのコンフリクトを防ぐ
+    - 「自分のPythonでは動きません」という情弱行動を防げる
 ---
 
-#### 構築手順
-1. project dir 作成
-1. cd project dir
-1. `python -m venv .venv`
+#### 仮想環境構築手順
+- 例： `myproject` というプロジェクトディレクトリ配下で仮想環境を作る
+    - お作法
+        - デスクトップに作らない
+        - root ディレクトリ直下には作らない
+        - 半角英数字のみで作成(日本語は使わんで)
+---
+
+1. プロジェクトディレクトリ作成
+    ```bash
+    mkdir myproject
+    cd myproject
+    ```
+1. 仮想環境構築
+    ```python
+    python -m venv .venv`
+    ``` 
+    
 1. `.venv` ディレクトリ作成確認
 1. 仮想環境に入る    
     - (linux / mac) `source .venv/bin/activate` 
     - (win) `venv\Script\activate` 
+
+- プロジェクトディレクトリ＝レポジトリの感覚
+- レポジトリがわからないひとにはただのホルダでオッケ
+
+
 ---
 
 #### 以後、必ずするクセ付けて
