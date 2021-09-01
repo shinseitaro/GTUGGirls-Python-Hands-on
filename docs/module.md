@@ -72,8 +72,24 @@ paginate: true
     ```
 ---
 ##### 違う階層に定義している場合２
-- 例：huga.py の関数を `src/child/huge.py` で呼び出す
+- 例： hoge.py で定義した関数を `src/child/huge.py` で呼び出す
 - かなりトリッキー
+- huga.py から見たら、hoge.py は 2階層上の src の配下にある
+- この src を 一時的にPATHに入れるという方法をとります
+- `__file__` は組み込み属性と呼ばれる特別なアトリビュートで当該ファイルパスを返す
+    ```python 
+    # src/child/huge.py
+    import sys
+    import os
+
+    # src/child/huge.pyの dirname の dirname を返すから rootdir は "src"
+    rootdir = os.path.dirname(os.path.dirname(__file__))
+    # "src" を一時的にPATHに入れる
+    sys.path.append(rootdir)
+    # よって、src に入っている hoge を import することができる
+    import hoge
+    print(hoge.callme("ﾌｶﾞﾌｶﾞ"))
+    ```
 
 ---
 ## 演習
@@ -86,7 +102,7 @@ paginate: true
         └── test.py
     ```
 ---
-- 2. `src/hoge.py` に以下を定義（写経してね）
+- 2. `src/hoge.py` に以下を定義
     ```python
     A = 1
     B = 1
