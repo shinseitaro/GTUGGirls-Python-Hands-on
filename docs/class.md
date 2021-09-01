@@ -21,76 +21,84 @@ paginate: true
 ---
 ### あとでやる（実際のソースコードへのリンク。number sys os time とか）
 + Pythonには、最初から組み込みでクラスがたくさん用意されている
-    + 例：文字列クラス https://docs.python.org/ja/3/library/stdtypes.html#str
-        + 文字列クラス
-        + 文字列メソッド
+    + 例：
+        - 文字列クラス
         + ソースコードは多分[これ](https://github.com/python/cpython/blob/b6d68aa08baebb753534a26d537ac3c0d2c21c79/Lib/collections/__init__.py#L1299)
+        - これが `s = "shinseitaro"` という文字列データを作った時のメソッドなどを提供している
     
 ---
 
 ### クラスからオブジェクト（インスタンス）を作る
 + 設計図（型）であるクラスは、そのままでは使えない
 + かならず、**実体化（インスタンス化）** する必要がある
-+ このインスタンスもオブジェクト
-    + 参照：[オブジェクト指向とクラス — Pythonオンライン学習サービス PyQ（パイキュー）ドキュメント](https://docs.pyq.jp/python/library/class.html#id6)
++ 実体化したものをインスタンスオブジェクトと呼ぶ
+    + 参照：[オブジェクト指向とクラス — Pythonオンライン学習サービス PyQ](https://docs.pyq.jp/python/library/class.html#id6)
 
 ---    
 #### 組み込みクラスのインスタンス化
-1. クラス全体をインポート
-    ```python 
-    import 組み込みクラス名
-    c = 組み込みクラス名.使いたいクラス()
-    ```
-1. 使いたいクラスだけインポート
-    ```python
-    from 組み込みクラス名 import 使いたいクラス
-    c = 使いたいクラス()
-    ```
-    この変数 `c` をインスタンスと呼ぶ
+- 組み込みクラス＝最初からPythonが用意してくれているクラス
+- 明示的に呼び出さなくても使える組み込みクラスが文字列クラスなど
+- 明示的に呼び出す（import）必要がある組み込みクラスがたくさんある。
+- 呼び出し方は、以下2通り
+    1. クラスが定義されているモジュール(ファイル)全体をインポート
+        ```python 
+        import モジュール
+        c = モジュール.使いたいクラス()
+        ```
+    1. 使いたいクラスだけインポート
+        ```python
+        from モジュール import 使いたいクラス
+        c = 使いたいクラス()
+        ```
+        - この変数 `c` をインスタンスオブジェクトと呼ぶ
+        - 上記２通りのどちらでもOKです（私は1が好みです）
 
 ---
-+ 例：
-    ```python 
-    import decimal
-    d = decimal.Decimal(10)
-    ```
-    もしくは
-    ```python 
-    from decimal import Decimal 
-    d = Decimal(10)
-    ```
-    ```python
-    # d はインスタンスオブジェクト。データとメソッドを持つ
-    >>> dir(d)
-    ['__abs__', '__add__', ...,
-    'adjusted', 'as_integer_ratio', 'as_tuple', 'canonical',...,
-    'max', 'max_mag', 'min', 'min_mag', ...,
-    'shift', 'sqrt', 'to_eng_string', 'to_integral', 
-    'to_integral_exact', 'to_integral_value']
-    ```
++ 例：十進固定及び浮動小数点数の算術演算のためのモジュール decimal の中にある `Decimal` クラスのインポート
+    1. 1の方法
+        ```python 
+        import decimal 
+        d = decimal.Decimal(10)
+        ```
+    1. 2の方法
+        ```python 
+        from decimal import Decimal 
+        d = Decimal(10)
+        ```
+    - `d` はインスタンスオブジェクト。dir関数で属性（データやメソッド）を確認できる
+        ```python
+        >>> dir(d)
+        ['__abs__', '__add__', ...,
+        'adjusted', 'as_integer_ratio', 'as_tuple', 'canonical',...,
+        'max', 'max_mag', 'min', 'min_mag', ...,
+        'shift', 'sqrt', 'to_eng_string', 'to_integral', 
+        'to_integral_exact', 'to_integral_value']
+        ```
 ---
 
 ## クラスを作る
-
-- [6-3. クラス — Pythonプログラミング入門 documentation](https://utokyo-ipp.github.io/6/6-3.html#%E3%82%AF%E3%83%A9%E3%82%B9%E5%AE%9A%E7%BE%A9)
 - クラスはデータ構造設計図
 - テンプレート
-
+- 何のためのクラスを作るのか？
+    - 同じようなコードを繰り返し書くことを防ぐため
+    - Don't Repeat Yourself (DRY) というPythonの哲学
 --- 
 
 ### クラスを定義する
 
+- [6-3. クラス](https://utokyo-ipp.github.io/6/6-3.html#%E3%82%AF%E3%83%A9%E3%82%B9%E5%AE%9A%E7%BE%A9)
 
-```python
-class クラス名: # クラス名
-    def メソッド名１(self, 引数, ...): # そのクラスに属するメソッド
-        実行文
-    def メソッド名２(self, 引数, ...):
-        実行文
-```
+- 基本文法
+    ```python
+    class クラス名: # クラス名
+        def メソッド名１(self, 引数, ...): # そのクラスに属するメソッド
+            実行文
+        def メソッド名２(self, 引数, ...):
+            実行文
+    ```
 + お作法としてクラス名は**大文字**で始める
 - メソッドの第一引数は `self` 
-- `self` は クラス自分自身 ⇐？？？ですよね
+- `self` は クラス自分自身 ⇐ :question: :thinking: :pleading_face: ですよね
 
 ---
 例：
@@ -101,55 +109,57 @@ class HelloForEver:
     def readline_v2(self, name):
         return 'Hello ' + name + ' .\n'
 ```
+
 ---
+- インスタンス化
+    ```python
+    >>> f = HelloForEver()
+    >>> dir(f)
+    ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', 
+    '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', 
+    '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', 
+    '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 
+    'readline', 'readline_v2']
+    ```
+    - 定義した `'readline', 'readline_v2'` が入っているのが確認できる
+- メソッド呼び出し
+    ```python
+    # readline を呼び出し
+    >>> f.readline()
+    'Hello.\n'
 
-```python
->>> f = HelloForEver()
->>> dir(f)
-['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', 
-'__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', 
-'__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', 
-'__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 
-'readline', 'readline_v2']
-```
-- 定義した `'readline', 'readline_v2'` が入っているのが確認できる
-
-
-```python
-# readline を呼び出し
->>> f.readline()
-'Hello.\n'
-
-# readline_v2 を呼び出し
->>> f.readline_v2("taro")
-'Hello taro .\n'
-```
-- `self` は、`.` で自分自身のメソッドにアクセスする仕組みのために定義
-- インスタンス化した時に、クラスに定義されたメソッドは自分自身を第一引数に取得する仕組みになっている
+    # readline_v2 を呼び出し
+    >>> f.readline_v2("taro")
+    'Hello taro .\n'
+    ```
+    - `self` は、`.` で自分自身のメソッドにアクセスする仕組みのために定義
+    - インスタンス化した時に、クラスに定義されたメソッドは自分自身を第一引数に取得する仕組みになっている
 ---
-試しに self 無しで定義してインスタンス化してみるとわかりやすい
-```python
->>> class HelloForEver:
-...     def readline():
-...         return 'Hello.\n'
-...     def readline_v2(name):
-...         return 'Hello ' + name + ' .\n'
-... 
->>> c = HelloForEver()
->>> c.readline()
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-TypeError: readline() takes 0 positional arguments but 1 was given
->>> 
-```
-- インスタンス化された時に自分自身を引数にとる仕組みがあるので、`readline() は 引数を0個とるハズなのに１与えられたので例外です` というエラーメッセージを出す
+- 試しに self 無しで定義してインスタンス化してみるとわかりやすい
+    ```python
+    >>> class HelloForEver:
+    ...     def readline():
+    ...         return 'Hello.\n'
+    ...     def readline_v2(name):
+    ...         return 'Hello ' + name + ' .\n'
+    ... 
+    >>> c = HelloForEver()
+    >>> c.readline()
+    Traceback (most recent call last):
+    File "<stdin>", line 1, in <module>
+    TypeError: readline() takes 0 positional arguments but 1 was given
+    >>> 
+    ```
+    - インスタンス化された時に自分自身を引数にとる仕組みがあるので、`readline() は 引数を0個とるハズなのに１与えられたので例外です` というエラーメッセージを出す
 ---
 ## 初期化と属性
 
 - [6-3. クラス](https://utokyo-ipp.github.io/6/6-3.html#%E5%88%9D%E6%9C%9F%E5%8C%96%E3%81%A8%E5%B1%9E%E6%80%A7)
 - クラスをインスタンス化する時に渡したい初期値の定義
-- __init__ メソッド内に定義
-- 通常、クラスを作る時は、__init__ メソッドを定義する。（__init__ が無いクラスはほとんど見かけない）
+- 初期値は `__init__` メソッド内に定義
+- 通常クラスを作る時は、`__init__` メソッドを定義する。
+- `__init__` が無いクラスはほとんど見かけない
+
 ---
 
 ```python
@@ -180,7 +190,9 @@ class Hello:
         return 'Hello!!'
 ```
 - 初期値として `name` を要求
-- メソッド `say` で、もし`self.name` 
+- メソッド `say` 
+    - もし`self.name` が文字列なら返り値 `Hello <名前> !!`
+    - そうでなければ 返り値 `Hello!!`
 ---
 ```python
 # インスタンス化する時に初期値を渡さないとエラー
@@ -205,4 +217,3 @@ TypeError: __init__() missing 1 required positional argument: 'name'
 >>> h.say()
 'Hello!!'
 ```
----

@@ -87,15 +87,19 @@ user=> (clojure.string/upper-case "abc")
 ```python 
 # リスト作成
 >>> colors = ['black', 'yellow', 'black', 'blue']
-
 # リストの要素数を返す len関数
 >>> len(colors)
 4
-
 # 第一引数に渡された要素がリストの中にいくつあるか返す count メソッド
 >>> colors.count('black')
 2
+
+# ユーザ定義の関数
+def tashizan(x,y):
+    return x + y
 ```
+
+
 ---
 ## オブジェクト
 
