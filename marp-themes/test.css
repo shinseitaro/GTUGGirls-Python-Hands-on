@@ -12,6 +12,7 @@ section {
     justify-content: start;
 }
 
+
 section.title h1 {
     color: white;
     font-family: "Arial", "Hiragino Kaku Gothic ProN";
@@ -43,3 +44,4 @@ section.slides h2 {
     position: absolute;
     left: 50px; top: 90px;
 }
+

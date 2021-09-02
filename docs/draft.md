@@ -2,6 +2,7 @@
 marp: true
 theme: test
 footer: "by **＠しんせいたろう**"
+header: "**bold** _test_"
 paginate: true
 ---
 # 雰囲気でPythonを使っている人のための<br>Python再入門
@@ -15,6 +16,8 @@ GTUGGirls ハンズオン
 - 一緒に写経してもらいたいところを考える
     - モジュールのところは一緒にするかどうか？
 - 会の後の質問場所  > メンションか、DM ください  
+- windows store でインストールしたひとのシェル、ターミナルという時はそれを立ち上げる
+- windows の仮想環境
 ---
 自己紹介
 
@@ -100,16 +103,20 @@ GTUGGirls ハンズオン
     mkdir myproject
     cd myproject
     ```
+1. 現在のPythonを確認する（任意）
+    ```bash
+    # linux / mac
+    which python
+    ```    
 1. 仮想環境構築
     ```bash
+    # python -m venv <仮想環境ディレクトリの名前>
     python -m venv .venv
     ``` 
-1. 仮想環境に入る 
+    - ディレクトリ名でよく使われるもの： `.venv` `venv` `myenv` `myvenv`
+1. 仮想環境のPythonを使うよう設定（アクティベート）し、確認
     ```bash
     source .venv/bin/activate
-    ```
-1. 仮想環境に入ったことを確認
-    ```bash
     which python
     ```
     
@@ -124,7 +131,13 @@ GTUGGirls ハンズオン
 
 1. インタラクティブシェル
     ```bash
-    python
+    python 
+    Python 3.8.3 (default, May 19 2020, 18:47:26) 
+    [GCC 7.3.0] :: Anaconda, Inc. on linux
+    Type "help", "copyright", "credits" or "license" for more information.
+
+    >>> print("Hello")
+    Hello 
     ```
 1. ファイル実行
     ```bash
@@ -133,7 +146,7 @@ GTUGGirls ハンズオン
 
 ---
 
-#### 以後、Python を実行するターミナルでは必ず仮想環境にはいる
+#### 以後、ターミナルを開いたらアクティベート＆確認する
 - (linux / mac) 
     ```bash
     source .venv/bin/activate
@@ -144,6 +157,26 @@ GTUGGirls ハンズオン
     venv\Script\activate
     where python 
     ``` 
+---
+#### 仮想環境ホルダの中をみてみよう
+
+```bash
+.venv
+├── bin
+│   ├── activate
+│   ├── pip # サードライブラリインストールツール pip
+│   ├── pip3
+│   ├── pip3.8
+│   ├── pygmentize
+│   ├── python -> /home/shinseitaro/miniconda3/bin/python
+│   └── python3 -> python # このPythonを使う
+├── include
+├── lib
+│   └── python3.8
+├── lib64 -> lib
+```
+(一部抜粋)
+
 ---
 
 ### ライブラリインストール
@@ -163,27 +196,33 @@ pip install ライブラリ名
 
 ### ライブラリインストール
 
-1. まずは `which python` / `where python` して仮想環境に入っているか確認
-1. `pip install ライブラリ名` するのは、pip じたいをUpdateするときだけ
+#### pip じたいのUpdate
+- 仮想環境構築した後、pip じたいのUpdateをおこなう。
     ```bash
+    # `which python` / `where python` で確認後
     pip install -U pip 
     ```
-1. 上記以外のインストールは、作業ディレクトリ直下に `requirements.txt` にインストールしたいライブラリ名を書いてインストールする
-    1. `requirements.txt` 新規作成(慣習的にこの名前だが違ってもOK)
-        ```bash
-        touch requirements.txt 
-        ``` 
-    1. `requirements.txt` にインストールしたいライブラリ名を書く
-        ```bash
-        # 一行に一つ
-        beautifulsoup4
-        # バージョン指定も可
-        requests-html == 0.10.0
-        ```
-    1. `-r` オプションでインストール
-        ```bash
-        pip install -r requirements.txt
-        ```
+---    
+#### サードライブラリインストール    
+1. `requirements.txt` 新規作成(慣習的にこの名前だが違ってもOK)
+    ```bash
+    touch requirements.txt 
+    ``` 
+1. `requirements.txt` にインストールしたいライブラリ名を書く
+    ```bash
+    # 一行に一つ
+    beautifulsoup4
+    # バージョン指定も可
+    requests-html == 0.10.0
+    ```
+    - その他の記法はこちら：[pip install - pip documentation v21.3.dev0](https://pip.pypa.io/en/latest/cli/pip_install/#example-requirements-file)
+
+1. `-r` オプションでインストール
+    ```bash
+    pip install -r requirements.txt
+    ```
+- 作業途中で追加のインストールが必要になった時も、`requirements.txt` に追記してインストールすればOK。新しく追加されたものだけインストールしてくれる。
+    
 ---
 ### ライブラリインストール 確認
 
@@ -343,3 +382,6 @@ ZeroDivisionError: division by zero
 }
 ```
 ---
+tips:
+- github の private repo 機能便利
+
