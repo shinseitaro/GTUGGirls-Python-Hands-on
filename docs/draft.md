@@ -10,6 +10,12 @@ paginate: true
 GTUGGirls ハンズオン
 
 ---
+めも：
+- `>>>` 部分は不要なところは削除
+- 一緒に写経してもらいたいところを考える
+    - モジュールのところは一緒にするかどうか？
+- 会の後の質問場所  > メンションか、DM ください  
+---
 自己紹介
 
 - [しんせいたろう](https://twitter.com/shinseitaro)
@@ -248,22 +254,13 @@ ZeroDivisionError: division by zero
 - モジュール
 ---
 
-## DRY 
-
-- 概念がわかってないとかけないPythonの哲学
-
----
-## 部品を作ってループで回す
-
-
----
----
 ### Pythonista がこのむ python らしい書き方
 
 - 内包表記
 - アンパック代入
-- 高階関数（lambda, map, filter）
 - f-リテラル
+- 高階関数（lambda, map, filter）
+
 ---
 
 ## test
