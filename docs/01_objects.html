@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>01_objects.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88">オブジェクト</h1>
+<ul>
+<li><a href="https://utokyo-ipp.github.io/1/1-3.html#%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88">1-3. 論理・比較演算と条件分岐の基礎 — オブジェクト</a></li>
+</ul>
+<h3 id="%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91">オブジェクト指向</h3>
+<ul>
+<li><strong>データと、そのデータを使った処理を一つのオブジェクトにまとめておこうという発想</strong></li>
+<li>データじたいが、自分自身は何をすることが出来るか（=<strong>メソッド</strong>）を持つイメージ</li>
+<li>一番のメリット：<strong>データを作ってしまえば、そのデータに対して出来ることを一つ一つコーディングする必要が無い</strong></li>
+</ul>
+<hr>
+<pre class="hljs"><code><div><span class="hljs-comment"># s に文字列を格納</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>s = <span class="hljs-string">"shinseitaro"</span>
+</div></code></pre>
+<ul>
+<li>s という変数に入れたのは &quot;shinseitaro&quot;という文字列をpython が評価したタイミングで、文字列オブジェクトが作成され、データは &quot;shinseitaro&quot;, メソッドに文字列に対して出来る色々なことが実装された状態になる</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment"># type関数で、s の型を調べる</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>type(s)
+&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> '<span class="hljs-title">str</span>'&gt;
+</span></div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># テキストシーケンス型 s が持つ アトリビュートを調べる.(長いので一部省略しています)</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>dir(s)
+[<span class="hljs-string">'__add__'</span>,...,
+<span class="hljs-string">'capitalize'</span>, <span class="hljs-string">'casefold'</span>, <span class="hljs-string">'center'</span>, <span class="hljs-string">'count'</span>, ...,
+<span class="hljs-string">'find'</span>, <span class="hljs-string">'format'</span>, <span class="hljs-string">'format_map'</span>, <span class="hljs-string">'index'</span>, ..., 
+<span class="hljs-string">'isdigit'</span>, <span class="hljs-string">'isidentifier'</span>, <span class="hljs-string">'islower'</span>, <span class="hljs-string">'isnumeric'</span>, ...,
+<span class="hljs-string">'join'</span>, <span class="hljs-string">'ljust'</span>, <span class="hljs-string">'lower'</span>, <span class="hljs-string">'lstrip'</span>, <span class="hljs-string">'maketrans'</span>, <span class="hljs-string">'partition'</span>, 
+<span class="hljs-string">'replace'</span>, <span class="hljs-string">'rfind'</span>, <span class="hljs-string">'rindex'</span>, <span class="hljs-string">'rjust'</span>, <span class="hljs-string">'rpartition'</span>, <span class="hljs-string">'rsplit'</span>, <span class="hljs-string">'rstrip'</span>, <span class="hljs-string">'split'</span>, 
+<span class="hljs-string">'splitlines'</span>, <span class="hljs-string">'startswith'</span>, <span class="hljs-string">'strip'</span>, <span class="hljs-string">'swapcase'</span>, <span class="hljs-string">'title'</span>, <span class="hljs-string">'translate'</span>, <span class="hljs-string">'upper'</span>, <span class="hljs-string">'zfill'</span>]
+</div></code></pre>
+<ul>
+<li>https://docs.python.org/ja/3/library/stdtypes.html#string-methods</li>
+</ul>
+<hr>
+<p><img src="https://i.imgur.com/PKgmwAS.png" alt=""></p>
+<ul>
+<li><code>s</code> は &quot;shinseitaro&quot; というデータを持つ</li>
+<li>データに対する処理は <code>.</code> で呼び出せる</li>
+<li>. で呼び出せる処理のことを <strong>メソッド</strong> という<pre class="hljs"><code><div><span class="hljs-comment"># オブジェクトのデータを大文字で返す .upper() メソッド</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>s.upper()
+<span class="hljs-string">'SHINSEITARO'</span>
+</div></code></pre>
+</li>
+</ul>
+<hr>
+<h2 id="%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%A8%E9%96%A2%E6%95%B0">メソッドと関数</h2>
+<ul>
+<li>オブジェクトのデータに対して、オブジェクトが持つ処理命令を「<strong>メソッド</strong>」</li>
+<li>引数として外から渡されたデータの処理命令を「<strong>関数</strong>」</li>
+</ul>
+<h3 id="%E8%A6%8B%E3%81%9F%E7%9B%AE%E3%81%AE%E9%81%95%E3%81%84">見た目の違い</h3>
+<ul>
+<li>メソッド
+<ul>
+<li><code>データ.メソッド()</code><pre class="hljs"><code><div>s = <span class="hljs-string">"shinseitaro"</span>
+s.upper() <span class="hljs-comment"># オブジェクトのデータを大文字で返すメソッド</span>
+s.replace(<span class="hljs-string">"taro"</span>, <span class="hljs-string">"jiro"</span>) <span class="hljs-comment"># オブジェクトのデータを置換して値を返すメソッド</span>
+</div></code></pre>
+</li>
+</ul>
+</li>
+<li>関数
+<ul>
+<li><code>関数名(引数)</code><pre class="hljs"><code><div>max([<span class="hljs-number">2</span>,<span class="hljs-number">5</span>,<span class="hljs-number">8</span>]) <span class="hljs-comment"># 渡されたデータで最大値を返す関数</span>
+len([<span class="hljs-number">2</span>,<span class="hljs-number">5</span>,<span class="hljs-number">8</span>]) <span class="hljs-comment"># 渡されたデータの個数を返す関数</span>
+str(<span class="hljs-number">12345</span>) <span class="hljs-comment">#  渡されたデータを文字列で返す関数</span>
+</div></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="%E6%96%87">文</h2>
+<ul>
+<li>通常1行で書く命令<pre class="hljs"><code><div><span class="hljs-keyword">import</span> os 
+<span class="hljs-keyword">return</span> v
+</div></code></pre>
+</li>
+<li>メソッドや関数のように呼び出しための <code>()</code> がついていない命令</li>
+<li>メモ
+<ul>
+<li>python２系では print は文</li>
+<li>python３系では print は関数<pre class="hljs"><code><div><span class="hljs-comment"># ２.ｘ</span>
+<span class="hljs-keyword">print</span> <span class="hljs-string">"Hello"</span>
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># ３.ｘ以降</span>
+print(<span class="hljs-string">"Hello"</span>)
+</div></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="%E3%81%BE%E3%81%A8%E3%82%81">まとめ</h2>
+<ul>
+<li>オブジェクトとは
+<ul>
+<li>データとメソッドをひとかたまりで持っている構造</li>
+<li>文字列や数値など python で評価(eval)したタイミングで全てオブジェクトに変わる</li>
+<li>だから、ユーザーが定義しなくても組み込まれたメソッドが使える</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>
