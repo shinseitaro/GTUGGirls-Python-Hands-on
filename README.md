@@ -41,7 +41,7 @@ GTUGGirls python ハンズオン資料
 1. 簡単な導入
     - エラーは読んで
 1. 概念(名前)
-    - [オブジェクト](docs/01_objects.pdf)
+    - [オブジェクト](docs/01_objects.html)
     - メソッド
     - インスタンス
 1. 関数定義
