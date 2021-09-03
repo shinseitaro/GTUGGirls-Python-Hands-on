@@ -5,10 +5,11 @@ footer: "by **＠しんせいたろう**"
 paginate: true
 ---
 
-# Pythonista が好んで使いがちな記法
+# Pythonista が好んでよく使う記法
 - 内包表記
 - アンパック代入
 - enumerate
+- zip
 - f-リテラル
 - 高階関数（lambda, map, filter）
 
@@ -43,7 +44,9 @@ paginate: true
     x, y, z = 1,10,100
     ```
 - enumerate や zip とよく使われる
+
 ---
+
 ## enumerate関数
 - [3-2. 繰り返し enumerate](https://utokyo-ipp.github.io/3/3-2.html?highlight=enumerate#enumerate)
 - リストをインデックスと要素のタプルで返す関数
@@ -89,6 +92,7 @@ paginate: true
     print([x * y for x, y in zip([10, 12, 14, 16, 18], [0, 2, 4, 6, 8])])
     # [0, 24, 56, 96, 144]
     ```
+
 ---
 
 ## f-リテラル
@@ -111,7 +115,6 @@ paginate: true
     print(f"{num2:0=3}")
     # 005
     ```
-
 ---
 ## 高階関数（lambda, map, filter）
 - [6-2. 高階関数 ](https://utokyo-ipp.github.io/6/6-2.html?highlight=lambda)

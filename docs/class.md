@@ -12,30 +12,29 @@ paginate: true
 
 ### オブジェクト（指向）とは
 + データと処理をひとまとめにしておこうという発想
-+ データじたいが、自分自身は何をすることが出来るか（メソッド）を持つ
-+ データにメソッドがブラブラぶら下がる
 + 一番のメリット：**データを作ってしまえば、そのデータに対して出来ることを一つ一つコーディングする必要が無い**
 + 仕組みを提供しているのが**クラス**
 
+### クラスがオブジェクトを提供する仕組み
+- [文字列クラス](https://github.com/python/cpython/blob/b6d68aa08baebb753534a26d537ac3c0d2c21c79/Lib/collections/__init__.py#L1299)のソースコードを見てみましょう
+- さっき `dir()` 関数で確認したメソッドの定義がある
+- 文字列クラスが文字列オブジェクトを作る時このクラスが実行されている。
+    1.  `s = "shinseitaro"` と pythonで実行すると、
+    1. [文字列クラス](https://github.com/python/cpython/blob/b6d68aa08baebb753534a26d537ac3c0d2c21c79/Lib/collections/__init__.py#L1299)に "shinseitaro"という文字列が渡される
+    1. ⇑で定義されている全てのメソッドを持った状態のオブジェクトを生成して変数`s` に格納
+
 ---
 ### クラスからオブジェクト（インスタンス）を作る
-+ 設計図（型）であるクラスは、そのままでは使えない
-+ かならず、**実体化（インスタンス化）** する必要がある
+- つまり、クラスはデータを引き取ってメソッドをくっつけてオブジェクトを返す（データの引き取りが無い場合もある）
++ そういう意味でクラスは雛形（設計図）と呼ばれたりする。
++ クラスからオブジェクトを作ることを、**実体化（インスタンス化）** という。
 + 実体化したものをインスタンスオブジェクトと呼ぶ
     + 参照：[オブジェクト指向とクラス — Pythonオンライン学習サービス PyQ](https://docs.pyq.jp/python/library/class.html#id6)
 
 ---
-#### 組み込みクラスのインスタンス化
-+ Pythonには、最初から組み込みでクラスがたくさん用意されている
-- 組み込みクラス
-    - 明示的に呼び出さなくても使える組み込みクラス: [文字列クラス](https://github.com/python/cpython/blob/b6d68aa08baebb753534a26d537ac3c0d2c21c79/Lib/collections/__init__.py#L1299), [整数型クラス](https://github.com/python/cpython/blob/4aa63d65a9971d14f1a2131b989dca0dab514a9d/Lib/numbers.py#L12)...
-        ```python
-        s = "shinseitaro"
-        i = 1000
-        ```
-    - クラスが定義されているモジュールを明示的に呼び出して( **import** する)使う組み込みクラス: [datetime](https://github.com/python/cpython/blob/b6d68aa08baebb753534a26d537ac3c0d2c21c79/Lib/datetime.py#L1563), [Decimal](https://github.com/python/cpython/blob/3527569f1cd0df697242b68a8a837f08904872fe/Lib/_pydecimal.py#L513), .... たくさん
----
-
+### 組み込みクラスのインスタンス化
++ Pythonには、最初から組み込みでクラスがたくさんある
+- モジュール（定義されているファイル）をインポートして使う
 #### import 文の書き方
 - 明示的に呼び出すには、**import 文**を書く    
 - 呼び出し方は、以下2通り

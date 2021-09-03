@@ -11,23 +11,19 @@ GTUGGirls ハンズオン
 
 ---
 めも：
-- `>>>` 部分は不要なところは削除
-- 一緒に写経してもらいたいところを考える
+- `>>>` 部分は不要なところは削除 > クラスのところだけ
+- 一緒に写経してもらいたいところを考える > クラスのところはやりたい
     - モジュールのところは一緒にするかどうか？
 - 会の後の質問場所  > メンションか、DM ください  
-- windows store でインストールしたひとのシェル、ターミナルという時はそれを立ち上げる
-- windows の仮想環境
-- ファイル実行　ファイル作る
-- vscode の code . の説明
-- オブジェクト指向の絵
 ---
-自己紹介
+## 自己紹介
 
 - [しんせいたろう](https://twitter.com/shinseitaro)
 - 雰囲気でpython書いてる(10年以上)
 - しごと
     - 米国株とれーだー
     - 時系列データ分析（株、暗号資産、為替）、投資ストラテジー作成
+    - ニュースのスクレイピングとレポート作り
     - python の個別指導
 - コミュニティ    
     - [GTUGGirls](https://gtuggirls.connpass.com/) (スタッフ)
@@ -42,23 +38,28 @@ GTUGGirls ハンズオン
 ## 今日やらないこと
 1. [Pythonプログラミング入門 — Pythonプログラミング入門 documentation](https://utokyo-ipp.github.io/)を一緒に読む、解く
     - 自主的にやった方が早いから
-    - 引っかかったら、質問してください。
+    - 引っかかったら、いつでも質問ウェルカムです
 
 ---
-今日伝えたいことはたったひとつ
-
-# とりあえずPythonの仮想環境作ってください。<br>心からのお願いです。
----
-### Windows Anaconda
+(始める前に Windows の方へのお願い)
+## ターミナルについて
+- コマンドプロンプトやPowershellなどのことを今日はまとめてターミナルと呼びます。
+### Windows Anaconda で Python をインストールした方
 ![bg right:60%](https://i.imgur.com/gne0Np7.png)
 - Anaconda Prompt を使う
 - Anaconda PowerShell Prompt ではない
 
 ---
-### Windows Store
-- Windows Store で python をインストールした場合
+### Windows Store で python をインストールした方
+![bg right:60%](https://i.imgur.com/glju8h4.png)
+
+- コマンドプロンプト を使う
+- PowerShell ではない
 
 ---
+今日伝えたいことはたったひとつ
+
+# とりあえずPythonの仮想環境作ってください。<br>心からのお願いです。
 
 ### Python :snake: を確認
 
@@ -128,8 +129,25 @@ GTUGGirls ハンズオン
 ---
 #### 仮想環境構築手順 Windows
 
-あとで書く
-
+1. プロジェクトディレクトリに入る
+    ```bash
+    cd myproject
+    ```
+1. 現在のPythonを確認する（任意）
+    ```bash
+    where python
+    ```    
+1. 仮想環境構築
+    ```bash
+    # python -m venv <仮想環境ディレクトリの名前>
+    python -m venv .venv
+    ```
+    - 注意：ファイルエクスプローラの設定によって `.` 始まりのホルダは「隠しホルダ」とみなされ表示されないことがあります。その場合は `venv` など適当に名前は変えて下さい
+1. 仮想環境のPythonを使うよう設定（アクティベート）し、確認
+    ```bash
+    .venv\Script\activate # \ は ￥で表示されると思います
+    where python
+    ```
 ---
 
 #### 実行
@@ -145,9 +163,15 @@ GTUGGirls ハンズオン
     Hello 
     ```
 1. ファイル実行
-    ```bash
-    python src/hoge.py
-    ```
+    - エディタで `myproject` を開いて下さい
+    - `src/hoge.py` を新規作成して下のコードを入力保存して下さい
+        ```python
+        print("Hello")
+        ```
+    - ターミナルで下記を実行して下さい
+        ```bash
+        python src/hoge.py
+        ```
 
 ---
 
@@ -312,8 +336,6 @@ ZeroDivisionError: division by zero
 ## 実践Python スクレイピングと可視化
 
 - お伝えしたPythonの概念を体感してもらう
-- repository: 
-- 
 
 
 ---
