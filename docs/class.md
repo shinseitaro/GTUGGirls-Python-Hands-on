@@ -16,21 +16,7 @@ paginate: true
 + データにメソッドがブラブラぶら下がる
 + 一番のメリット：**データを作ってしまえば、そのデータに対して出来ることを一つ一つコーディングする必要が無い**
 + 仕組みを提供しているのが**クラス**
-+ 同じような性質を持ったオブジェクトをまとめてクラスという仕組みに突っ込んでおけば、楽だよね？！っていう考え
 
----
-### 組み込みクラス
-+ Pythonには、最初から組み込みでクラスがたくさん用意されている
-    + 例：
-        - 文字列クラス
-            + [ソースコード](https://github.com/python/cpython/blob/b6d68aa08baebb753534a26d537ac3c0d2c21c79/Lib/collections/__init__.py#L1299)
-            - これが `s = "shinseitaro"` という文字列データを作った時のメソッドなどを提供している
-        - datetime クラス
-            - 日時データを扱うクラス
-            - [ソースコード](https://github.com/python/cpython/blob/b6d68aa08baebb753534a26d537ac3c0d2c21c79/Lib/datetime.py#L1563)
-            - `datetime.datetime(2021,1,1,9,0,0)` など
-           
-    
 ---
 ### クラスからオブジェクト（インスタンス）を作る
 + 設計図（型）であるクラスは、そのままでは使えない
@@ -38,11 +24,18 @@ paginate: true
 + 実体化したものをインスタンスオブジェクトと呼ぶ
     + 参照：[オブジェクト指向とクラス — Pythonオンライン学習サービス PyQ](https://docs.pyq.jp/python/library/class.html#id6)
 
----    
+---
 #### 組み込みクラスのインスタンス化
++ Pythonには、最初から組み込みでクラスがたくさん用意されている
 - 組み込みクラス
-    - 明示的に呼び出さなくても使える組み込みクラス: 文字列クラス, 整数型クラス... 
-    - 明示的に呼び出す必要がある組み込みクラス: os, sys, datetime, glob, .... たくさん
+    - 明示的に呼び出さなくても使える組み込みクラス: [文字列クラス](https://github.com/python/cpython/blob/b6d68aa08baebb753534a26d537ac3c0d2c21c79/Lib/collections/__init__.py#L1299), [整数型クラス](https://github.com/python/cpython/blob/4aa63d65a9971d14f1a2131b989dca0dab514a9d/Lib/numbers.py#L12)...
+        ```python
+        s = "shinseitaro"
+        i = 1000
+        ```
+    - クラスが定義されているモジュールを明示的に呼び出して( **import** する)使う組み込みクラス: [datetime](https://github.com/python/cpython/blob/b6d68aa08baebb753534a26d537ac3c0d2c21c79/Lib/datetime.py#L1563), [Decimal](https://github.com/python/cpython/blob/3527569f1cd0df697242b68a8a837f08904872fe/Lib/_pydecimal.py#L513), .... たくさん
+---
+
 #### import 文の書き方
 - 明示的に呼び出すには、**import 文**を書く    
 - 呼び出し方は、以下2通り
@@ -85,17 +78,15 @@ paginate: true
 ---
 
 ## クラスを作る
-- クラスはデータ構造設計図
-- テンプレート
+- クラスを自作すると、どういう型のデータを持つか、そのデータにどういう処理をするかを定義出来る
+- 開発者は、自分が扱うデータに対する処理を定義しておけば、何度も同じコードを書く必要がなくなる
 - 何のためのクラスを作るのか？
     - 同じようなコードを繰り返し書くことを防ぐため
     - **Don't Repeat Yourself (DRY)** というPythonの哲学
 --- 
-
 ### クラスを定義する
 
 - [6-3. クラス](https://utokyo-ipp.github.io/6/6-3.html#%E3%82%AF%E3%83%A9%E3%82%B9%E5%AE%9A%E7%BE%A9)
-
 - 基本文法
     ```python
     class クラス名: # クラス名
@@ -106,7 +97,7 @@ paginate: true
     ```
 + お作法としてクラス名は**大文字**で始める
 - メソッドの第一引数は `self` 
-- `self` は クラス自分自身 ⇐ :question: :thinking: :pleading_face: ですよね
+    - `self` は クラス自分自身 ⇐ :question: :thinking: :pleading_face: ですよね
 
 ---
 例：
