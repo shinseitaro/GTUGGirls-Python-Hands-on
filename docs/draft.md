@@ -10,12 +10,6 @@ paginate: true
 GTUGGirls ハンズオン
 
 ---
-めも：
-- `>>>` 部分は不要なところは削除 > クラスのところだけ
-- 一緒に写経してもらいたいところを考える > クラスのところはやりたい
-    - モジュールのところは一緒にするかどうか？
-- 会の後の質問場所  > メンションか、DM ください  
----
 ## 自己紹介
 
 - [しんせいたろう](https://twitter.com/shinseitaro)
@@ -34,6 +28,8 @@ GTUGGirls ハンズオン
 ## 今日やること
 1. 仮想環境作成
 1. Python完全に理解した、からちょっと脱却して、チョットデキルひとになる最初の一歩
+    1. 勉強した内容を踏まえて scraping と 可視化のデモ
+1. VSCode の便利な設定
 
 ## 今日やらないこと
 1. [Pythonプログラミング入門 — Pythonプログラミング入門 documentation](https://utokyo-ipp.github.io/)を一緒に読む、解く
@@ -57,13 +53,17 @@ GTUGGirls ハンズオン
 - PowerShell ではない
 
 ---
+# 仮想環境構築
+
+---
 今日伝えたいことはたったひとつ
 
-# とりあえずPythonの仮想環境作ってください。<br>心からのお願いです。
+## とりあえずPythonの仮想環境作ってください。<br>心からのお願いです。
+---
 
 ### Python :snake: を確認
 
-- terminal / command prompt 立ち上げ
+- ターミナルを立ち上げる
 - windows:
     ```bash
     where python
@@ -86,10 +86,10 @@ GTUGGirls ハンズオン
 - ただのホルダ
 - 仮想環境を作成とは
     - プロジェクトディレクトリにPythonをコピーすること
-- 仮想環境に入るとは
-    - つくったコピー環境を使うこと
+- 仮想環境に入る（アクティベートする）とは
+    - つくったコピー環境のPythonを使うこと
 - なぜ仮想環境を作る？
-    - 何かしらの理由で実行できなくなったとしても仮想環境ディレクトリを消して再作成すればいい
+    - 何かしらの理由でPythonを実行できなくなったとしても仮想環境ディレクトリを消して再作成すればいい
     - サードパーティライブラリのコンフリクトにすぐ対応出来る
     - 「自分のPythonではinstall出来ません」という情弱行動を防げる :point_left: :satisfied:
 ---
@@ -161,6 +161,8 @@ GTUGGirls ハンズオン
 
     >>> print("Hello")
     Hello 
+
+    >>> exit()
     ```
 1. ファイル実行
     - エディタで `myproject` を開いて下さい
@@ -190,7 +192,6 @@ GTUGGirls ハンズオン
 #### 仮想環境ホルダの中をみてみよう
 
 - myprojectをエディタで開いてください
-- 
 
 ```bash
 .venv
@@ -273,6 +274,32 @@ pip freeze
     - 気になるひとは → pipxのススメ - podhmo's diary https://pod.hatenablog.com/entry/2021/06/23/221537
 
 ---
+### 仮想環境構築まとめ
+
+- mac / linux 
+    ```bash
+    mkdir myproject
+    cd myproject 
+
+    python -m venv .venv
+    source .venv/bin/activate # アクティベート
+    which python
+
+    pip install -U pip
+    ```
+- windows 
+    ```bash
+    mkdir myproject
+    cd myproject 
+
+    python -m venv .venv
+    .venv\Script\activate # アクティベート
+    where python 
+
+    pip install -U pip
+    ```
+
+---
 ## 演習
 1. ディレクトリ `gtugtest` 作成
 1. その中に python の仮想環境を作成
@@ -304,16 +331,6 @@ ZeroDivisionError: division by zero
 - 質問する時は、エラーメッセージを全部コピペして、問題ない範囲でコードを渡して再現してもらおう
 
 ---
-### コピペはしないで
-
-- [記者に「プログラミングのスキル」って必要なの？ちなみにNHKニュースの画像生成も記者がコードを書いてます｜NHK取材ノート｜note](https://note.com/nhk_syuzai/n/n9ccbd599da50)
-    > こうした手を動かした学習は確実に取材に役立ち、大きなシステムトラブルが発生した時に、**原因が推測**できたりするようになりました。
-    - ほんとコレ
-    - ほんとコレ
-    - ほんとコレ    
-
-
----
 ## python の概念,キーワード,知らないとツライ単語
 - オブジェクト
     - メソッド 
@@ -324,45 +341,28 @@ ZeroDivisionError: division by zero
     - モジュール
 ---
 
-### Pythonista がこのむ python らしい書き方
-
-- 内包表記
-- アンパック代入
-- f-リテラル
-- 高階関数（lambda, map, filter）
-
----
-
 ## 実践Python スクレイピングと可視化
 
 - お伝えしたPythonの概念を体感してもらう
+- [shinseitaro/GTUGGirls-Python-Hands-on-test-project: GTUGGirls-Python-Hands-on 用テストプロジェクト](https://github.com/shinseitaro/GTUGGirls-Python-Hands-on-test-project)
 
+--- 
+## VSCode の設定
 
+1. requirements.txt に以下3つを入れてインストール
+    ```
+    isort 
+    black 
+    flake8
+    ```
+1. ファイル＞ユーザー設定＞設定＞ワークスペースを押下＞右上のファイルボタンを押す
+    ![](https://i.imgur.com/2YevRXp.jpg)
 ---
-
-## python 概念と pythonist らしいコードの例
-
-### 構造
-
-- 私が「キレイ」だと思ったpythonのfile構造
-- モジュールの説明も兼ねる
-- main.py を実行ファイルとして、あとのファイルには関数群を作る
-
-
-### python はオブジェクト
-
-- beautifulsoup でスクレイピングしたデータを
-- pandas に流し込んで 
-- 可視化
-
----
-
-### VSCode の設定
-
+### mac / linux 
 ```json
 {
     // PythonのPATHをワークスペースの仮想環境にする
-    "python.pythonPath": "${workspaceFolder}/venv/bin/python",
+    "python.pythonPath": "${workspaceFolder}/.venv/bin/python",
     // 仮想環境にインストールしたファイルは監視対象から除外する
     "files.watcherExclude": {
         "**/venv/**": true
@@ -386,12 +386,11 @@ ZeroDivisionError: division by zero
 }
 ```
 ---
-
-### VSCode の設定
+### windows
 ```json
 {
     // PythonのPATHをワークスペースの仮想環境にする
-    "python.pythonPath": "${workspaceFolder}\\venv\\Scripts\\python.exe",
+    "python.pythonPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
     // 仮想環境にインストールしたファイルは監視対象から除外する
     "files.watcherExclude": {
         "**/venv/**": true
@@ -414,7 +413,3 @@ ZeroDivisionError: division by zero
     "python.analysis.completeFunctionParens": true
 }
 ```
----
-tips:
-- github の private repo 機能便利
-

@@ -18,7 +18,7 @@ paginate: true
 # s に文字列を格納
 >>> s = "shinseitaro"
 ```
-- s という変数に入れたのは "shinseitaro"という文字列とpython が評価したタイミングで、sというオブジェクトが作成され、s はデータは "shinseitaro", メソッドに文字列に対して出来る色々なことが実装された状態になる
+- s という変数に入れたのは "shinseitaro"という文字列をpython が評価したタイミングで、文字列オブジェクトが作成され、データは "shinseitaro", メソッドに文字列に対して出来る色々なことが実装された状態になる
     
 ```python
 # type関数で、s の型を調べる
@@ -76,7 +76,6 @@ paginate: true
     ```python
     import os 
     return v
-    raise 10/0, "0で割り算出来ません"
     ```
 - メソッドや関数のように呼び出しための `()` がついていない命令
 - メモ

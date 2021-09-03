@@ -40,7 +40,7 @@ paginate: true
 - モジュール(`.py`ファイル)が違えばスコープは違う
 - 違うモジュールに定義した関数やクラスはどうやって使う？
 ##### 同じ階層に定義している場合
-- 例：srcディレクトリ配下に設置した hoge.py の関数を moge.py で呼び出す
+- 例：`src/hoge.py` の関数を `src/moge.py` で呼び出す
     ```bash
     └── src
         ├── hoge.py
@@ -58,26 +58,43 @@ paginate: true
     ```
 ---
 ##### 違う階層に定義している場合１
-- 例：`src/child` 配下に設置した huga.py の関数を moge.py で呼び出す
+- 例：`src/child/huga.py` に記述した関数を `src/moge.py` で呼び出す
+- moge.py からみたら、同列の child の配下の huga なのでそのまま `child.huga` でインポート可
     ```bash
     └── src
         ├── child
         │   └── huga.py
         ├── hoge.py
         ├── moge.py
-    ```    
+    ```  
+- `src/child/huga.py` に関数定義
     ```python
     # src/child/huga.py
     def ringmeup(name):
         return f"Hello {name}"    
     ```
+- `src/moge.py` で呼び出し
+    ```python
+    import child.huga
+    print(child.huga.ringmeup("sehinseitaro"))
+    ```
+
 ---
 ##### 違う階層に定義している場合２
-- 例： hoge.py で定義した関数を `src/child/huge.py` で呼び出す
-- かなりトリッキー
-- huga.py から見たら、hoge.py は 2階層上の src の配下にある
+- 例： `src/hoge.py` で定義した関数を `src/child/huge.py` で呼び出す
+    ```bash
+    └── src
+        ├── child
+        │   └── huga.py # ここからhogeは二階層上のディレクトリ配下にある
+        ├── hoge.py
+        ├── moge.py
+    ```  
+- `huga.py` から見たら、`hoge.py` は 2階層上の src の配下にある
 - この src を 一時的にPATHに入れるという方法をとります
-- `__file__` は組み込み属性と呼ばれる特別なアトリビュートで当該ファイルパスを返す
+
+---
+- このモジュールの親の親(`src`)をルートディレクトリとして一時的にPATHに追加
+- その配下にある `hoge.py` を import 出来るようにする
     ```python 
     # src/child/huge.py
     import sys
@@ -91,48 +108,5 @@ paginate: true
     import hoge
     print(hoge.callme("ﾌｶﾞﾌｶﾞ"))
     ```
+    - `__file__` は組み込み属性と呼ばれる特別なアトリビュートで当該ファイルパスを返す
 
----
-(あとで考える。時間次第ではやらない)
-## 演習
-
-- 1. 作業ディレクトリ配下に以下の構成でファイルを作成してください
-    ```bash
-    └── src
-        ├── hoge.py
-        ├── moge.py
-        └── test.py
-    ```
----
-- 2. `src/hoge.py` に以下を定義
-    ```python
-    A = 1
-    B = 1
-
-    # ファイルに定義される関数やクラスは、モジュールスコープに属する
-    def func(a, b):
-        # + などの関数はPythonの中ならどこでも使えるビルドインスコープに属しているので
-        # ここですぐに使うことが出来る
-        x = a + b 
-        return x 
-
-    class BookMark:
-        def __init__(self, title, url, author):
-            self.title = title 
-            self.url = url 
-            self.author = author 
-
-        def get_title(self):
-            return self.title
-
-    class SongList:
-        def __init__(self, title, url, artist):
-            self.title = title 
-            self.url = url 
-            self.artist = artist 
-
-        def get_title(self):
-            return self.title.upper()
-    ```
----
-- 3. 

@@ -48,7 +48,6 @@ paginate: true
         from モジュール import 使いたいクラス
         c = 使いたいクラス()
         ```
-    - この変数 `c` を`インスタンスオブジェクト`と呼ぶ
 
 ---
 + 例：十進固定及び浮動小数点数の算術演算のためのモジュール decimal の中にある `Decimal` クラスのインポート
@@ -89,6 +88,8 @@ paginate: true
 - 基本文法
     ```python
     class クラス名: # クラス名
+        def __init__(self,  引数, ...): # 初期値を設定する特別なメソッド
+            実行文
         def メソッド名１(self, 引数, ...): # そのクラスに属するメソッド
             実行文
         def メソッド名２(self, 引数, ...):
@@ -99,119 +100,45 @@ paginate: true
     - `self` は クラス自分自身 ⇐ :question: :thinking: :pleading_face: ですよね
 
 ---
-例：
-```python
-class HelloForEver:
-    def readline(self):
-        return 'Hello.\n'
-    def readline_v2(self, name):
-        return 'Hello ' + name + ' .\n'
-```
-
----
-- インスタンス化
-    ```python
-    >>> f = HelloForEver()
-    >>> dir(f)
-    ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', 
-    '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', 
-    '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', 
-    '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 
-    'readline', 'readline_v2']
-    ```
-    - 定義した `'readline', 'readline_v2'` が入っているのが確認できる
-- メソッド呼び出し
-    ```python
-    # readline を呼び出し
-    >>> f.readline()
-    'Hello.\n'
-
-    # readline_v2 を呼び出し
-    >>> f.readline_v2("taro")
-    'Hello taro .\n'
-    ```
-    - `self` は、`.` で自分自身のメソッドにアクセスする仕組みのために定義
-    - インスタンス化した時に、クラスに定義されたメソッドは自分自身を第一引数に取得する仕組みになっている
----
-- 試しに self 無しで定義してインスタンス化してみるとわかりやすい
-    ```python
-    >>> class HelloForEver:
-    ...     def readline():
-    ...         return 'Hello.\n'
-    ...     def readline_v2(name):
-    ...         return 'Hello ' + name + ' .\n'
-    ... 
-    >>> c = HelloForEver()
-    >>> c.readline()
-    Traceback (most recent call last):
-    File "<stdin>", line 1, in <module>
-    TypeError: readline() takes 0 positional arguments but 1 was given
-    >>> 
-    ```
-    - インスタンス化された時に自分自身を引数にとる仕組みがあるので、`readline() は 引数を0個とるハズなのに１与えられたので例外です` というエラーメッセージを出す
----
-## 初期化と属性
-
-- [6-3. クラス](https://utokyo-ipp.github.io/6/6-3.html#%E5%88%9D%E6%9C%9F%E5%8C%96%E3%81%A8%E5%B1%9E%E6%80%A7)
-- クラスをインスタンス化する時に渡したい初期値の定義
-- 初期値は `__init__` メソッド内に定義
-- 通常クラスを作る時は、`__init__` メソッドを定義する。
-- `__init__` が無いクラスはほとんど見かけない
-
----
-
-```python
-class HelloFile:
-    def __init__(self, n):
-        self.n = n # selfの属性として n を登録
-    def readline(self):
-        if self.n == 0:
-            return ''
-        self.n = self.n - 1
-        return 'Hello.\n'
-```
-- `__init__ ` 関数の第一引数も必ず `self` 
-- 第二引数以降、いくつでも引数を追加出来る
-- 第二引数に追加した引数は、インスタンス化のタイミングで**必ず渡す引数**になる
-- `self.n` でselfの属性として n を登録しているので、このクラスに定義されている他のメソッドで `self.n` を利用できる
----
-
-（教材の例が分かりづらかったので、書き直してみた）
 
 ```python
 class Hello:
-    def __init__(self, name):
+    def __init__(self, name, address):
         self.name = name # selfの属性として name を登録
+        self.address = address
+
     def say(self):
-        if type(self.name) == str:
-            return f'Hello, {self.name}!!'
-        return 'Hello!!'
+        return "Hello " + self.name
+
+    def home(self):
+        return "your address is " + self.address
 ```
-- 初期値として `name` を要求
-- メソッド `say` 
-    - もし`self.name` が文字列なら返り値 `Hello <名前> !!`
-    - そうでなければ 返り値 `Hello!!`
+- `__init__` メソッドの第一引数も必ず `self` 
+- 初期値は `__init__` メソッドを作ってその中に定義
+- 第二引数以降、いくつでも引数を追加出来る
+- 第二引数に追加した引数は、インスタンス化のタイミングで**必ず渡すデータ**
+- 取得した初期値は、`__init__ ` メソッド内で **selfの属性として登録**
+- 他のメソッドで、`self` を通じて使えるデータになる
 ---
-```python
-# インスタンス化する時に初期値を渡さないとエラー
->>> h = Hello()
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-TypeError: __init__() missing 1 required positional argument: 'name'
+- インスタンス化する時に初期値を渡さないとエラー
+    ```python
+    h = Hello()
+    print(h.say())
+    ```
+    ```bash
+    python src/hoge.py
 
-# インスタンス化成功
->>> h = Hello("Taro")
-```
-
-```python
-# メソッド呼び出し
->>> h.say()
-'Hello, Taro!!'
-```
-```python
-# 数値を初期値にしてインスタンス化
->>> h = Hello(123)
-# メソッド呼び出し
->>> h.say()
-'Hello!!'
-```
+    Traceback (most recent call last):
+    File "<stdin>", line 1, in <module>
+    TypeError: __init__() missing 2 required positional arguments: 'name' and 'address'
+    ```
+- 初期値を渡してインスタンス化
+    ```python
+    h = Hello("Taro", "Tokyo")
+    print(h.say())
+    ```
+    ```bash
+    python src/hoge.py 
+    
+    Hello Taro
+    ```
