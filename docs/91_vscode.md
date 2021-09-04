@@ -33,7 +33,7 @@
 
 ### mac / linux 
 - `.venv` の部分はご自身の仮想環境ホルダ名に合わせてください
-```json
+```
 {
     // PythonのPATHをワークスペースの仮想環境にする
     "python.pythonPath": "${workspaceFolder}/.venv/bin/python",
@@ -63,7 +63,7 @@
 ### windows
 - `.venv` の部分はご自身の仮想環境ホルダ名に合わせてください
 
-```json
+```
 {
     // PythonのPATHをワークスペースの仮想環境にする
     "python.pythonPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
