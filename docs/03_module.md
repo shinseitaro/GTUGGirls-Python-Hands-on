@@ -1,10 +1,3 @@
----
-marp: true
-theme: test
-footer: "by **＠しんせいたろう**"
-paginate: true
----
-
 # 名前空間
 
 - [3-3. 関数 変数とスコープ](https://utokyo-ipp.github.io/3/3-3.html#%E5%A4%89%E6%95%B0%E3%81%A8%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97)
@@ -15,31 +8,27 @@ paginate: true
 
 ## スコープ
 - 変数、関数、クラスなどが有効な範囲
+- 3つのスコープがある
 
----
-## スコープ
+1. ビルドインスコープ
+    + `+`、 `>` 、 `def` `type()` `max()` など、どこでも使える関数などが所属
+2. モジュールスコープ
+    + `.py`ファイルに記述された変数や関数やクラスが所属
+    + トップレベル(グローバル)とも呼ぶ
+3. ローカルスコープ
+    + ファイル記述された関数やクラスの「内部」のみが所属
+
 ![bg right:60%](https://i.imgur.com/xOdTeLq.jpg)
 
-##### ビルドインスコープ
-+ `+`、 `>` 、 `def` `type()` `max()` などいきなり使える python のコードが所属
-##### モジュールスコープ
-+ `.py`ファイルに書く変数や関数やクラスが所属
-+ トップレベル(グローバル)とも呼ぶ
-
-##### ローカルスコープ
-+ ファイル記述された関数やクラスの「内部」のみが所属
-
----
-#### 意識してローカルスコープを使おう
+### 意識してローカルスコープを使おう
 + 図の例でいえば、`func` 関数の中の 引数 `a` などは、**func 関数のなかでしか使えない**
 + もし、別の関数やクラスで同じ名前の引数を使っていてもローカルスコープだけで有効なので、コンフリクトしない
-+ これがもっとも安全（＝エラー処理が楽）な方法
 
----
-#### モジュール間のスコープ
+### モジュール間のスコープ
 - モジュール(`.py`ファイル)が違えばスコープは違う
 - 違うモジュールに定義した関数やクラスはどうやって使う？
-##### 同じ階層に定義している場合
+
+### 同じ階層に定義している場合
 - 例：`src/hoge.py` の関数を `src/moge.py` で呼び出す
     ```bash
     └── src
@@ -47,19 +36,19 @@ paginate: true
         ├── moge.py
     ```
     ```python
-    # hoge.py
+    # src/hoge.py
     def callme(name):
         return f"Hello {name}"
     ```
     ```python
-    # moge.py
+    # src/moge.py
     import moge 
     print(moge.callme("shinseitaro"))
     ```
----
-##### 違う階層に定義している場合１
+
+### 違う階層に定義している場合１
 - 例：`src/child/huga.py` に記述した関数を `src/moge.py` で呼び出す
-- moge.py からみたら、同列の child の配下の huga なのでそのまま `child.huga` でインポート可
+- `moge.py` からみたら、同列の `child` の配下の huga なのでそのまま `child.huga` でインポート可
     ```bash
     └── src
         ├── child
@@ -69,9 +58,8 @@ paginate: true
     ```  
 - `src/child/huga.py` に関数定義
     ```python
-    # src/child/huga.py
     def ringmeup(name):
-        return f"Hello {name}"    
+        return f"Hello {name}"
     ```
 - `src/moge.py` で呼び出し
     ```python
@@ -79,9 +67,9 @@ paginate: true
     print(child.huga.ringmeup("sehinseitaro"))
     ```
 
----
-##### 違う階層に定義している場合２
-- 例： `src/hoge.py` で定義した関数を `src/child/huge.py` で呼び出す
+
+### 違う階層に定義している場合２
+- 例： `src/hoge.py` に記述した関数を `src/child/huge.py` で呼び出す
     ```bash
     └── src
         ├── child
@@ -89,12 +77,9 @@ paginate: true
         ├── hoge.py
         ├── moge.py
     ```  
-- `huga.py` から見たら、`hoge.py` は 2階層上の src の配下にある
-- この src を 一時的にPATHに入れるという方法をとります
-
----
-- このモジュールの親の親(`src`)をルートディレクトリとして一時的にPATHに追加
-- その配下にある `hoge.py` を import 出来るようにする
+- `huga.py` から見たら、`hoge.py` は 2階層上の `src` の配下にある
+- `src/child/huge.py` モジュールの親の親ディレクトリ(`src`)をルートディレクトリとして一時的にPATHに追加
+- これで、`src/hoge.py` を `src/child/huge.py`で import 出来るようになる
     ```python 
     # src/child/huge.py
     import sys
@@ -102,9 +87,9 @@ paginate: true
 
     # src/child/huge.pyの dirname の dirname を返すから rootdir は "src"
     rootdir = os.path.dirname(os.path.dirname(__file__))
-    # "src" を一時的にPATHに入れる
+    # src を一時的にPATHに入れる
     sys.path.append(rootdir)
-    # よって、src に入っている hoge を import することができる
+    # これで、src に入っている hoge を import することができる
     import hoge
     print(hoge.callme("ﾌｶﾞﾌｶﾞ"))
     ```

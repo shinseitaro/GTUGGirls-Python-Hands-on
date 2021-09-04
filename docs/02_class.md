@@ -1,13 +1,5 @@
----
-marp: true
-theme: test
-footer: "by **＠しんせいたろう**"
-paginate: true
----
-
 # クラス
 
----
 ## オブジェクトとクラス
 
 ### オブジェクト（指向）とは
@@ -17,13 +9,12 @@ paginate: true
 
 ### クラスがオブジェクトを提供する仕組み
 - [文字列クラス](https://github.com/python/cpython/blob/b6d68aa08baebb753534a26d537ac3c0d2c21c79/Lib/collections/__init__.py#L1299)のソースコードを見てみましょう
-- さっき `dir()` 関数で確認したメソッドの定義がある
+- `dir()` 関数で確認したメソッドの定義がある
 - 文字列クラスが文字列オブジェクトを作る時このクラスが実行されている。
     1.  `s = "shinseitaro"` と pythonで実行すると、
     1. [文字列クラス](https://github.com/python/cpython/blob/b6d68aa08baebb753534a26d537ac3c0d2c21c79/Lib/collections/__init__.py#L1299)に "shinseitaro"という文字列が渡される
     1. ⇑で定義されている全てのメソッドを持った状態のオブジェクトを生成して変数`s` に格納
 
----
 ### クラスからオブジェクト（インスタンス）を作る
 - つまり、クラスはデータを引き取ってメソッドをくっつけてオブジェクトを返す（データの引き取りが無い場合もある）
 + そういう意味でクラスは雛形（設計図）と呼ばれたりする。
@@ -31,12 +22,11 @@ paginate: true
 + 実体化したものをインスタンスオブジェクトと呼ぶ
     + 参照：[オブジェクト指向とクラス — Pythonオンライン学習サービス PyQ](https://docs.pyq.jp/python/library/class.html#id6)
 
----
 ### 組み込みクラスのインスタンス化
-+ Pythonには、最初から組み込みでクラスがたくさんある
+- Pythonには、最初から組み込みでクラスがたくさんある
 - モジュール（定義されているファイル）をインポートして使う
+
 #### import 文の書き方
-- 明示的に呼び出すには、**import 文**を書く    
 - 呼び出し方は、以下2通り
     1. クラスが定義されているモジュール(ファイル)全体をインポート
         ```python 
@@ -49,39 +39,31 @@ paginate: true
         c = 使いたいクラス()
         ```
 
----
+
 + 例：十進固定及び浮動小数点数の算術演算のためのモジュール decimal の中にある `Decimal` クラスのインポート
-    1. 1の方法
+    - 1の方法
         ```python 
         import decimal 
         d = decimal.Decimal(10)
         ```
-    1. 2の方法
+    - 2の方法
         ```python 
         from decimal import Decimal 
         d = Decimal(10)
         ```
-    - `d` はインスタンスオブジェクト。dir関数で属性（データやメソッド）を確認できる
+    - dir関数で属性（データやメソッド）を確認。1，2どちらの方法で作っても同じです。
         ```python
         >>> dir(d)
-        ['__abs__', '__add__', ...,
-        'adjusted', 'as_integer_ratio', 'as_tuple', 'canonical',...,
-        'max', 'max_mag', 'min', 'min_mag', ...,
-        'shift', 'sqrt', 'to_eng_string', 'to_integral', 
-        'to_integral_exact', 'to_integral_value']
+        ['__abs__', '__add__', ...,'adjusted', 'as_integer_ratio', 'as_tuple', 'canonical',...,'max', 'max_mag', 'min', 'min_mag', ...,'shift', 'sqrt', 'to_eng_string', 'to_integral', 'to_integral_exact', 'to_integral_value']
 
         >>> d.sqrt() # dの平方根を出すメソッド .sqrt()を呼び出す
         Decimal('3.162277660168379331998893544')
         ```
----
-
 ## クラスを作る
-- クラスを自作すると、どういう型のデータを持つか、そのデータにどういう処理をするかを定義出来る
-- 開発者は、自分が扱うデータに対する処理を定義しておけば、何度も同じコードを書く必要がなくなる
-- 何のためのクラスを作るのか？
-    - 同じようなコードを繰り返し書くことを防ぐため
-    - **Don't Repeat Yourself (DRY)** というPythonの哲学
---- 
+- 扱いたいデータに対して共通のメソッドなどと定義しておけば何度も同じコードを書く必要がなくなる
+- クラスを自作するとは、同じようなコードを繰り返し書くことを防ぐ
+- **Don't Repeat Yourself (DRY)** というPythonの哲学
+
 ### クラスを定義する
 
 - [6-3. クラス](https://utokyo-ipp.github.io/6/6-3.html#%E3%82%AF%E3%83%A9%E3%82%B9%E5%AE%9A%E7%BE%A9)
@@ -95,13 +77,14 @@ paginate: true
         def メソッド名２(self, 引数, ...):
             実行文
     ```
-+ お作法としてクラス名は**大文字**で始める
+- お作法としてクラス名は**大文字**で始める
 - メソッドの第一引数は `self` 
-    - `self` は クラス自分自身 ⇐ :question: :thinking: :pleading_face: ですよね
+    - `self` は クラス自分自身 ⇐ どゆこと？
 
----
-
+### `self` とは
 ```python
+# src/hoge.py
+
 class Hello:
     def __init__(self, name, address):
         self.name = name # selfの属性として name を登録
@@ -114,14 +97,14 @@ class Hello:
         return "your address is " + self.address
 ```
 - `__init__` メソッドの第一引数も必ず `self` 
-- 初期値は `__init__` メソッドを作ってその中に定義
-- 第二引数以降、いくつでも引数を追加出来る
-- 第二引数に追加した引数は、インスタンス化のタイミングで**必ず渡すデータ**
-- 取得した初期値は、`__init__ ` メソッド内で **selfの属性として登録**
-- 他のメソッドで、`self` を通じて使えるデータになる
----
-- インスタンス化する時に初期値を渡さないとエラー
+- 初期値は `__init__` メソッドを作ってその中に定義、第二引数以降はいくつでも引数を追加化
+- 初期値は、`__init__ ` メソッド内で **selfの属性として登録**
+- 初期値は、他のメソッドで、`self` を通じて使えるデータになる
+
+#### インスタンス化
+- インスタンス化する時に初期値を渡さないと TypeError
     ```python
+    # src/hoge.py
     h = Hello()
     print(h.say())
     ```
@@ -134,6 +117,7 @@ class Hello:
     ```
 - 初期値を渡してインスタンス化
     ```python
+    # src/hoge.py
     h = Hello("Taro", "Tokyo")
     print(h.say())
     ```
@@ -141,4 +125,15 @@ class Hello:
     python src/hoge.py 
     
     Hello Taro
+    ```
+- 初期値は self の属性として登録しているで、インスタンスオブジェクトからもアクセス化
+    ```python
+    # src/hoge.py
+    h = Hello("Taro", "Tokyo")
+    print(h.address)
+    ```
+    ```bash
+    python src/hoge.py 
+    
+    Tokyo
     ```
