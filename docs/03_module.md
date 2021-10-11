@@ -86,7 +86,7 @@
     import os
 
     # src/child/huge.pyの dirname の dirname を返すから rootdir は "src"
-    rootdir = os.path.dirname(os.path.dirname(__file__))
+    rootdir = os.path.dirname(os.path.dirname("__file__"))
     # src を一時的にPATHに入れる
     sys.path.append(rootdir)
     # これで、src に入っている hoge を import することができる
